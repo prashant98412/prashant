@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day Page</title>
+  <!-- Add any necessary stylesheets or scripts here -->
+  <style>
+    /* Add your CSS styles here */
+    .flex {
+      display: flex;
+    }
+    .flex-col {
+      flex-direction: column;
+    }
+    .items-center {
+      align-items: center;
+    }
+    .justify-center {
+      justify-content: center;
+    }
+    .h-screen {
+      height: 100vh;
+    }
+    .-mt-16 {
+      margin-top: -4rem; /* Adjust as needed */
+    }
+    .text-4xl {
+      font-size: 2.25rem; /* Adjust as needed */
+    }
+    .my-4 {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .bg-green-500 {
+      background-color: #34d399; /* Adjust as needed */
+    }
+    .hover\:bg-green-700:hover {
+      background-color: #10b981; /* Adjust as needed */
+    }
+    .bg-red-500 {
+      background-color: #ef4444; /* Adjust as needed */
+    }
+    .hover\:bg-red-700:hover {
+      background-color: #dc2626; /* Adjust as needed */
+    }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col items-center justify-center h-screen -mt-16">
+    <!-- Conditionally render content based on yesPressed state -->
+    <!-- If yesPressed is true, display bear kissing GIF and "Ok yay!!!" message -->
+    <!-- Otherwise, display bear holding roses image, "Will you be my Valentine?" text, and Yes/No buttons -->
+    <img src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif" alt="Bear with roses" class="h-[200px]">
+    <h1 class="text-4xl my-4">Will you be my Valentine?</h1>
+    <div>
+      <!-- Button for Yes option -->
+      <button id="yes-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4" style="font-size: 16px;" onclick="handleYesClick()">Yes</button>
+      <!-- Button for No option -->
+      <button id="no-button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="handleNoClick()">No</button>
+    </div>
+  </div>
+
+  <!-- Script to handle button clicks -->
+  <script>
+    // Define variables to track state
+    let noCount = 0;
+    let yesPressed = false;
+
+    // Function to handle click on No button
+    function handleNoClick() {
+      noCount++;
+      updateNoButtonText();
+    }
+
+    // Function to update text of No button
+    function updateNoButtonText() {
+      const phrases = [
+        "No",
+        "Are you sure?",
+        "Really sure?",
+        "Think again!",
+        "Last chance!",
+        "Surely not?",
+        "You might regret this!",
+        "Give it another thought!",
+        "Are you absolutely certain?",
+        "This could be a mistake!",
+        "Have a heart!",
+        "Don't be so cold!",
+        "Change of heart?",
+        "Wouldn't you reconsider?",
+        "Is that your final answer?",
+        "You're breaking my heart ;(",
+      ];
+      const buttonText = phrases[Math.min(noCount, phrases.length - 1)];
+      document.getElementById('no-button').innerText = buttonText;
+    }
+
+    // Function to handle click on Yes button
+    function handleYesClick() {
+      yesPressed = true;
+      // Update DOM to show "Ok yay!!!" message and bear kissing GIF
+      document.getElementById('yes-button').style.display = 'none';
+      document.getElementById('no-button').style.display = 'none';
+      const image = document.createElement('img');
+      image.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+      document.body.appendChild(image);
+      const message = document.createElement('div');
+      message.innerText = "Ok yay!!!";
+      message.classList.add('text-4xl', 'font-bold', 'my-4');
+      document.body.appendChild(message);
+    }
+  </script>
+</body>
+</html>
